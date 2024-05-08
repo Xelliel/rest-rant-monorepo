@@ -27,15 +27,19 @@ async function handleSubmit(e) {
 
     const data = await response.json()
 
-    if (response.status === 200) {
+    if (response.ok) {
         setCurrentUser(data.user)
-        history.push(`/`)
+        localStorage.setItem('token', data.token);
+        history.push(`/`);
     } else {
         setErrorMessage(data.message)
     }
+} catch *error {
+    console.error("An error occured", error);
+    setErrorMessage("An error has occured, please try again");
 }
   
-
+}
     
         console.log(data)
     
